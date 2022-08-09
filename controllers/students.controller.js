@@ -7,7 +7,7 @@ const findAll = async (req, res) => {
 
 const find = async (req, res) => {
     // req --> is the request parameter at the end of the url e.g. '/:id'
-    // *** convert "id" from string to Number (for type conversion) by placing "+" in front of variable data ***
+    // *** convert "id" from string to Number (for type conversion) by placing "+" in front of variable data because (URL: "TypeOf = String") ***
     const id = +req.params.id;
     const student = await Student.find(id);
     res.status(200).send({ student });

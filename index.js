@@ -29,14 +29,14 @@ app.use('/api/students', router);
 
 // making a GET request with the ENDPOINT that we want (base/root endpoint)
 app.get('/api', (req, res) => {
-    res.send("Welcome to my API!!!")
+    res.send("<h1>Welcome to my API project demo</h1>")
 });
 
 // add route for Swagger docs (route, boot-up swagger package/instance, swaggerUI set-up with swagger document)
 app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // add 404 route (placed at bottom, "*" is for all other routes)
-app.get("*", (req, res) => res.status(404).send("There is no content at this route"));
+app.get("*", (req, res) => res.status(404).send("<h1>There is no content at this route !!!</h1>"));
 
 // run server & instruct it to listen
 // port variable above(actual port we want)
