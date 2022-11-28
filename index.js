@@ -1,6 +1,6 @@
-// *** Making of our own API (a user would enter url with ENDPOINT "/api") ***
+// *** Making of our own API (a user would enter url with ENDPOINT e.g. "localhost:3000/api") ***
 
-// ******* command to run application is "NPM RUN WATCH" ********
+// ******* command to run application in DEV mode is "NPM RUN WATCH" ********
 
 //  importation of Express (framework) & Swagger UI
 const express = require('express');
@@ -11,13 +11,13 @@ const swaggerDocument = require('./config/swagger.js');
 
 const router = require('./routes/students.js');
 
-// utilisation of Express (and running it)
+// initilisation of Express
 const app = express();
 
-// specification of PORT (or an alternative e.g. 3000) / PORT CONFIGURATION
+// PORT CONFIGURATION
 const port = process.env.PORT || 3000;
 
-// need to specify the format of the data, which is JSON
+// need to specify the format of the data, which is JSON (Parse it)
 app.use(express.json());
 
 // this line of code MUST be before "apt.get()"
@@ -27,20 +27,12 @@ app.use(express.json());
 // 2. use the file ROUTER (imported from above)
 app.use('/api/students', router);
 
-// making a GET request with the ENDPOINT that we want (base/root endpoint)
-app.get('/api', (req, res) => {
-    res.send("<h1>Welcome to my API project demo</h1>")
-});
-
 // add route for Swagger docs (route, boot-up swagger package/instance, swaggerUI set-up with swagger document)
 app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // add 404 route (placed at bottom, "*" is for all other routes)
 app.get("*", (req, res) => res.status(404).send("<h1>There is no content at this route !!!</h1>"));
 
-// run server & instruct it to listen
-// port variable above(actual port we want)
-// req = request, res = response
 app.listen(port, () => {
     console.log(`Server is running on PORT ${port}`)
 });
